@@ -3,6 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,4 +51,50 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render( $request,Throwable $exception ){
+
+
+        if( $exception instanceof ValidationException ){
+
+            return response()->json([
+                'message' => 'Hubo un rror al procesar los datos recibidos',
+                'errors' => $exception->errors()
+            ], 422);
+
+        }
+
+        if( $exception instanceof QueryException ){
+
+            return response()->json([
+                'message' => 'Hubo un error con la base de datos',
+                'errors' => $exception->getMessage()
+            ], 500);
+
+        }
+
+        if( $exception instanceof ModelNotFoundException ){
+
+            return response()->json([
+                'message' => 'El recurso solicitado no se encontró'
+            ], 404);
+
+        }
+
+        if( $exception instanceof NotFoundHttpException ){
+
+            return response()->json([
+                'message' => 'La ruta solicitada no existe',
+                'errors' => $exception->getMessage()
+            ],404);
+
+        }
+
+        return response()->json([
+            'message' => 'Ocurrió un error inesperado',
+            'errors' => $exception->getMessage()
+        ], 500);
+
+    }
+    
 }
