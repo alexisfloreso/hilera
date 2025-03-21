@@ -15,7 +15,11 @@ Este es un proyecto de API REST desarrollado en Laravel que permite la gestión 
    git clone https://github.com/alexisfloreso/hilera.git
    cd hilera
    ```
-2. Crea y configura el archivo de entorno:
+2. Instala las dependencias de Laravel:
+   ```sh
+   composer install
+   ```
+3. Crea y configura el archivo de entorno:
    ```sh
    cp .env.example .env
    ```
