@@ -1,11 +1,8 @@
 <?php
 namespace App\Repositories;
 
-use App\DTO\UserDTO;
 use App\Models\Categoria;
 use App\Repositories\Interfaces\CategoriaRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class CategoriaRepository implements CategoriaRepositoryInterface
 {

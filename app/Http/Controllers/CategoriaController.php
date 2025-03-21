@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\CategoriaRepositoryInterface;
 use Illuminate\Http\Response;
