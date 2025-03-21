@@ -28,14 +28,7 @@ class ProductoController extends Controller
 
         return response()->json([
             'success' => true, 
-            'data' => $productos->items(),
-            'pagination' => [
-                'total' => $productos->total(),
-                'current_page' => $productos->currentPage(),
-                'last_page' => $productos->lastPage(),
-                'next_page_url' => $productos->nextPageUrl(),
-                'prev_page_url' => $productos->previousPageUrl(),
-            ]
+            'data' => $productos,
         ], Response::HTTP_OK);
     }
     
@@ -76,9 +69,9 @@ class ProductoController extends Controller
     {
 
         $productoData = $request->validate([
-            'nombre' => 'required|string|alpha_num|max:255',
+            // 'nombre' => 'required|string|alpha_num|max:255',
             'stock' => 'required|integer|min:0',
-            'category_id' => 'required|integer|exists:categorias,id',
+            // 'category_id' => 'required|integer|exists:categorias,id',
         ]);
 
         $producto = $this->productoRepository->update($id,$productoData);

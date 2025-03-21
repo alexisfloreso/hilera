@@ -14,7 +14,7 @@ class ProductoRepository implements ProductoRepositoryInterface
 
     public function getAll()
     {
-        return Producto::with('categoria')->paginate(3);
+        return Producto::with('categoria')->get();
     }
 
     // public function getById($id)
@@ -22,10 +22,13 @@ class ProductoRepository implements ProductoRepositoryInterface
     //     return $this->model->find($id);
     // }
 
-    public function create(array $categoria)
+    public function create(array $producto)
     {
     
-        return Producto::create($categoria);
+        $productoCreado = Producto::create($producto);
+
+        return Producto::with('categoria')->find($productoCreado->id);
+        
     }
 
     public function update($id, array $data)
