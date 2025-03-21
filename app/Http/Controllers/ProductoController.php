@@ -42,7 +42,7 @@ class ProductoController extends Controller
     public function store(Request $request){
 
         $productoData = $request->validate([
-            'nombre' => 'required|string|alpha_num|max:255',
+            'nombre' => 'required|string|max:255|regex:/^[a-zA-Z0-9\s]+$/',
             'stock' => 'required|integer|min:0',
             'category_id' => 'required|integer|exists:categorias,id',
         ]);
